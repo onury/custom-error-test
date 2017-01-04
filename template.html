@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono|Karla:400,700" rel="stylesheet">
+<!-- mark -->
+    <script src="lib/helper.js"></script>
+    <script src="test.js"></script>
+    <script>
+        window.onload = function () {
+            var env = document.getElementById('env');
+            env.innerHTML = 'Environment: ' + helper.getEnv();
+
+            var test = new Test(errors, helper);
+            var rows = test.run();
+
+            var tableRows = rows.map(function (row, rowIndex) {
+                var columns = row.map(function (cell, index) {
+                    var t = rowIndex === 0 ? 'th' : 'td',
+                        cls = index === 0 ? 'title' : 'val',
+                        sCls = rowIndex > 0 && index === 0 ? 'code' : '';
+                    if (cell === 'FAIL') sCls += 'fail';
+                    if (cell === '*') sCls += 'yes';
+                    if (cell === 'NO SUPPORT') sCls += 'noSupport';
+                    return '<' + t + ' class="' + cls + '"><span class="' + sCls + '">' + cell + '</span></' + t + '>';
+                });
+                return '<tr>' + columns.join('') + '</tr>';
+            });
+
+            var main = document.getElementById('main');
+            main.innerHTML = '<table>' + tableRows + '</table>';
+
+            const stackSamples = test.logStackSamples();
+            console.log('BEGIN —> Stack Samples\n');
+            stackSamples.forEach(function (stack) { console.log(stack + '\n'); });
+            console.log('Stack Samples <— END\n');
+        };
+    </script>
+
+    <style>
+        body, html {
+            font-family: 'Karla', sans-serif;
+            font-size: 15px;
+        }
+        body {
+            padding: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            font-family: 'Fira Mono', monospace;
+            font-size: 13px;
+            font-weight: bold;
+            height: 50px;
+            /*background-color: #e5f2fc;*/
+            color: #000;
+            background-color: #f8fafa;
+            box-shadow: 0px 2px 1px rgba(0,0,0,0.18);
+        }
+        td {
+            height: 30px;
+        }
+        table, th {
+            border: 1px solid #f0f2f2;
+        }
+        td {
+            border: 1px solid #e7e8e8;
+            min-width: 100px;
+        }
+        .title {
+            text-align: right;
+            padding-left: 5px;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+        .val {
+            text-align: center;
+        }
+        .val span {
+            display: inline-block;
+        }
+        .fail {
+            color: #fff;
+            background-color: #f97779;
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 2px;
+            font-size: 13px;
+        }
+        .noSupport {
+            color: #ddd;
+            font-size: 13px;
+        }
+        .yes {
+            color: #45bfbd;
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        code, .code {
+            font-family: 'Fira Mono', monospace;
+            font-size: 13px;
+            padding: 2px 5px;
+            background-color: #f4f5f5;
+            color: #2f495f;
+            border-radius: 2px;
+        }
+        #env {
+            font-size: 12px;
+            color: #9db7ce;
+        }
+        .info {
+            font-size: 13px !important;
+        }
+        li {
+            line-height: 25px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="env"></div>
+
+    <div id="main"></div>
+
+    <br />
+    <b>Notes:</b>
+    <ul>
+        <li><i class="info">Crucial and failed tests are marked <span class="fail">FAIL</span>. Non-crucial failed tests are marked "no".</i></li>
+        <li><i class="info"><code>Err_inherits</code> uses <code>util.inherits</code> which is supported only in Node.</i></li>
+        <li><i class="info"><code>class</code> and <code>extends</code> are not supported by all browsers. See <a href="http://caniuse.com/#search=es6" target="_blank">compatibility table</a>.</i></li>
+        <li><i class="info"><code>Object.setPrototypeOf()</code> is not supported by all browsers. See <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf#Browser_compatibility" target="_blank">compatibility table</a>.</i></li>
+        <li><i class="info">See console for stack samples of each custom error.</i></li>
+    </ul>
+</body>
+
+</html>
