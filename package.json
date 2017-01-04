@@ -1,0 +1,43 @@
+{
+  "name": "custom-error-test",
+  "version": "1.0.0",
+  "description": "Compare and test methodologies for creating a custom error.",
+  "main": "index.js",
+  "files": [
+    "errors",
+    "lib",
+    "template.html",
+    "index.js",
+    "test.js",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "node ./index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onury/custom-error-test.git"
+  },
+  "keywords": [
+    "custom",
+    "error",
+    "constructor",
+    "extends",
+    "setprototypeof",
+    "prototype",
+    "create",
+    "object",
+    "proto",
+    "__proto__"
+  ],
+  "author": "Onur Yildirim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onury/custom-error-test/issues"
+  },
+  "homepage": "https://github.com/onury/custom-error-test#readme",
+  "dependencies": {
+    "text-table": "^0.2.0"
+  }
+}
