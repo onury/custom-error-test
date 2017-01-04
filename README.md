@@ -1,6 +1,6 @@
 # Custom Errors in JavaScript
 
-Custom errors are useful when you want to track code with context-specific information. There are several ways to define a custom error in JavaScript. But since inheritance is not a first-citizen feature in JS (until ES2015); there's also so much discussion on how to define a proper custom error.
+Custom errors are useful when you want to track code with context-specific information. There are several ways to define a custom error in JavaScript. But since inheritance is not a first-citizen feature in JS (until ES2015); there's also so much discussion on how to implement a proper custom error.
 
 This module tests various implementations for custom errors, widely used by developers; such as methods making use of `Error.call()`, `Object.create()`, `new Error()`, `Object.setPrototypeOf()`, `extends` (ES2015) and `util.inherits` (Node). See `/errors` directory for [included implementations][errors-dir].
 
@@ -23,7 +23,7 @@ Run `npm start` which will output test results to console for the current Node.j
 
 Better, you can [directly view this page][test-page] for testing your current browser.
 
-![Screenshot](https://raw.github.com/onury/custom-error-test/master/result.png)
+[![Screenshot](https://raw.github.com/onury/custom-error-test/master/result.png)][test-page]
 
 ### License
 MIT.
