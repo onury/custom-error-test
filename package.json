@@ -1,7 +1,7 @@
 {
   "name": "custom-error-test",
   "version": "1.0.0",
-  "description": "Compare and test methodologies for creating a custom error.",
+  "description": "Compare and test various custom error implementations.",
   "main": "index.js",
   "files": [
     "errors",
