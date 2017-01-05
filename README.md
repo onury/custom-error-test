@@ -15,9 +15,7 @@ What we expect from a custom error implementation is:
 - `e.stack` MUST be set and should have line-tracable info.
 - `e.tostring()` MUST return error name and/or message.
 - `({}).toString.call(e)` SHOULD output `"error"`.
-- and some more...
-
-`npm i custom-error-test` to install.  
+- and some more... 
 
 ### Test
 
