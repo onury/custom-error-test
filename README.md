@@ -24,6 +24,7 @@ Run `npm start` which will output test results to console for the current Node.j
 Better, you can [directly view this page][test-page] for testing your current browser.
 
 [![Screenshot](https://raw.github.com/onury/custom-error-test/master/result.png)][test-page]
+_Capture of a test on Chrome 55 browser._
 
 ### CustomError: The One
 
