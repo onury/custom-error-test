@@ -17,21 +17,29 @@
             var test = new Test(errors, helper);
             var rows = test.run();
 
-            var tableRows = rows.map(function (row, rowIndex) {
+            if (!rows || rows.length <= 0) return;
+
+            var thead = rows[0].map(function (cell, index) {
+                return '<th>' + cell + '</th>';
+            }).join('');
+            thead = '<thead><tr>' + thead + '</tr></thead>';
+            rows.shift();
+
+            var tbody = rows.map(function (row, rowIndex) {
                 var columns = row.map(function (cell, index) {
-                    var t = rowIndex === 0 ? 'th' : 'td',
-                        cls = index === 0 ? 'title' : 'val',
-                        sCls = rowIndex > 0 && index === 0 ? 'code' : '';
+                    var cls = index === 0 ? 'title' : 'val',
+                        sCls = index === 0 ? 'code' : '';
                     if (cell === 'FAIL') sCls += 'fail';
                     if (cell === '*') sCls += 'yes';
                     if (cell === 'NO SUPPORT') sCls += 'noSupport';
-                    return '<' + t + ' class="' + cls + '"><span class="' + sCls + '">' + cell + '</span></' + t + '>';
+                    return '<td class="' + cls + '"><span class="' + sCls + '">' + cell + '</span></td>';
                 });
                 return '<tr>' + columns.join('') + '</tr>';
             });
+            tbody = '<tbody>' + tbody.join('') + '</tbody>';
 
             var main = document.getElementById('main');
-            main.innerHTML = '<table>' + tableRows + '</table>';
+            main.innerHTML = '<table>' + thead + tbody + '</table>';
 
             const stackSamples = test.logStackSamples();
             console.log('BEGIN —> Stack Samples\n');
@@ -46,7 +54,7 @@
             font-size: 15px;
         }
         body {
-            padding: 30px;
+            padding: 0px 30px;
         }
         table {
             width: 100%;
@@ -120,16 +128,27 @@
         li {
             line-height: 25px;
         }
+        .github-div {
+            display: inline-block;
+            position: absolute;
+            top: 20px;
+            right: 35px;
+        }
     </style>
 
 </head>
 
 <body>
+    <h2>Custom Error Test </h2>
+    <div class="github-div">
+        <a class="github-button" href="https://github.com/onury/custom-error-test" data-style="mega" aria-label="View onury/custom-error-test on GitHub">View on GitHub</a>
+    </div>
+
     <div id="env"></div>
-
-    <div id="main"></div>
-
     <br />
+    <div id="main"></div>
+    <br />
+
     <b>Notes:</b>
     <ul>
         <li><i class="info">Crucial and failed tests are marked <span class="fail">FAIL</span>. Non-crucial failed tests are marked "no".</i></li>
@@ -138,6 +157,9 @@
         <li><i class="info"><code>Object.setPrototypeOf()</code> is not supported by all browsers. See <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf#Browser_compatibility" target="_blank">compatibility table</a>.</i></li>
         <li><i class="info">See console for stack samples of each custom error.</i></li>
     </ul>
+    <br />
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>
