@@ -9,7 +9,7 @@
     } else {
         Err_new_setProto = function Err_new_setProto(message) {
             var err = new Error(message);
-            Object.setPrototypeOf(err, Err_new_setProto.prototype);
+            setProto(err, Err_new_setProto.prototype);
 
             Object.defineProperty(err, 'name', {
                 enumerable: false,
@@ -18,10 +18,7 @@
             });
             return err;
         }
-        Object.setPrototypeOf(Err_new_setProto.prototype, Error.prototype);
-        // Err_new_setProto.prototype = Object.create(Error.prototype, {
-        //     constructor: { value: Err_new_setProto }
-        // });
+        setProto(Err_new_setProto.prototype, Error.prototype);
     }
 
     // EXPORT
