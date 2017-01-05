@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-    function Err_constr(message) {
+    function Err_setProto(message) {
         Object.defineProperty(this, 'name', {
             enumerable: false,
             writable: false,
-            value: 'Err_constr'
+            value: 'Err_setProto'
         });
 
         Object.defineProperty(this, 'message', {
@@ -15,7 +15,7 @@
         });
 
         if (Error.hasOwnProperty('captureStackTrace')) { // V8
-            Error.captureStackTrace(this, Err_constr);
+            Error.captureStackTrace(this, Err_setProto);
         } else {
             Object.defineProperty(this, 'stack', {
                 enumerable: false,
@@ -24,19 +24,17 @@
             });
         }
     }
-
-    Err_constr.prototype = Object.create(Error.prototype, {
-        constructor: { value: Err_constr }  // this makes the difference (compared to Error_create)
-    });
-    // Another way to write this:
-    // Err_constr.prototype = Object.create(Error.prototype);
-    // Err_constr.prototype.constructor = Err_constr;
+    if (typeof Object.setPrototypeOf === 'function') {
+        Object.setPrototypeOf(Err_setProto.prototype, Error.prototype);
+    } else {
+        Err_setProto.noSupport = true;
+    }
 
     if (typeof module === 'object' && typeof module.exports === 'object') {
-        module.exports = Err_constr;
+        module.exports = Err_setProto;
     } else {
         window.errors = window.errors || [];
-        window.errors.push(Err_constr);
+        window.errors.push(Err_setProto);
     }
 
 })();
