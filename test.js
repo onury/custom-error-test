@@ -57,7 +57,7 @@
             this.exec('e.stack has name', function (E, e, s) { return s.indexOf(e.name) >= 0; }),
             this.exec('e.stack has ERR_MSG', function (E, e, s) { return s.indexOf(self.ERR_MSG) >= 0; }, true),
             this.exec('e.stack has line info', function (E, e, s) { return s.indexOf('/test.js:') >= 0; }),
-            this.exec('e.stack has no extra line', function (E, e, s) { return s.split('\n')[1].indexOf(e.name) < 0; }, true),
+            this.exec('e.stack has no extra line', function (E, e, s) { var sp = s.split('\n'); return sp.length > 1 && sp[1].indexOf(e.name) < 0; }, true),
             this.exec('getPrototypeOf(E) === E.__proto__', function (E, e, s) { return Error.__proto__ && Object.getPrototypeOf(E) === E.__proto__; }, true),
             this.exec('getPrototypeOf(e) === e.__proto__', function (E, e, s) { return Error.__proto__ && Object.getPrototypeOf(e) === e.__proto__; }, true)
         ];
@@ -66,11 +66,11 @@
     Test.prototype.logStackSamples = function () {
         return this.instances.map(function (e) {
             if (e === null) return 'NO SUPPORT';
-            var stack = '';
+            var stack = (e.constructor ? e.constructor.name : '(unknown)') + ' stack sample:\n';
             try {
                 throw e;
             } catch (err) {
-                stack = err.stack;
+                stack += err.stack;
             }
             return stack;
         });
