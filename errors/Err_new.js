@@ -26,6 +26,8 @@
     }
     Err_new.prototype = new Error();
 
+    // EXPORT
+
     if (typeof module === 'object' && typeof module.exports === 'object') {
         module.exports = Err_new;
     } else {

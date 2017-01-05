@@ -1,9 +1,10 @@
 (function () {
     'use strict';
 
-    var Err_new_setProto = {};
+    var setProto = Object.setPrototypeOf,
+        Err_new_setProto = {};
 
-    if (typeof Object.setPrototypeOf !== 'function') {
+    if (!setProto) {
         Err_new_setProto.noSupport = true;
     } else {
         Err_new_setProto = function Err_new_setProto(message) {
@@ -15,15 +16,15 @@
                 writable: false,
                 value: 'Err_new_setProto'
             });
-
-            if (Error.captureStackTrace) {
-                Error.captureStackTrace(err, Err_new_setProto);
-            }
             return err;
         }
-
-        Err_new_setProto.prototype.constructor = Err_new_setProto;
+        Object.setPrototypeOf(Err_new_setProto.prototype, Error.prototype);
+        // Err_new_setProto.prototype = Object.create(Error.prototype, {
+        //     constructor: { value: Err_new_setProto }
+        // });
     }
+
+    // EXPORT
 
     if (typeof module === 'object' && typeof module.exports === 'object') {
         module.exports = Err_new_setProto;
@@ -31,4 +32,5 @@
         window.errors = window.errors || [];
         window.errors.push(Err_new_setProto);
     }
+
 })();

@@ -32,6 +32,8 @@
     // Err_constr.prototype = Object.create(Error.prototype);
     // Err_constr.prototype.constructor = Err_constr;
 
+    // EXPORT
+
     if (typeof module === 'object' && typeof module.exports === 'object') {
         module.exports = Err_constr;
     } else {

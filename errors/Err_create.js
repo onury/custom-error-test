@@ -24,7 +24,10 @@
             });
         }
     }
+
     Err_create.prototype = Object.create(Error.prototype);
+
+    // EXPORT
 
     if (typeof module === 'object' && typeof module.exports === 'object') {
         module.exports = Err_create;

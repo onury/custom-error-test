@@ -28,6 +28,8 @@
     // Err_call.prototype = Object.create(Error.prototype);
     // Err_call.prototype.constructor = Err_call;
 
+    // EXPORT
+
     if (typeof module === 'object' && typeof module.exports === 'object') {
         module.exports = Err_call;
     } else {

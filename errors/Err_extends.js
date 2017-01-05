@@ -34,6 +34,8 @@
     // so we check here
     check();
 
+    // EXPORT
+
     if (typeof module === 'object' && typeof module.exports === 'object') {
         module.exports = Err_extends;
     } else {
