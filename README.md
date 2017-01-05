@@ -2,7 +2,7 @@
 
 Custom errors are useful when you want to track code with context-specific information. There are several ways to define a custom error in JavaScript. But since inheritance is not a first-citizen feature in JS (until ES2015); there's also so much discussion on how to implement a proper custom error.
 
-See this [SO Question][so-question], [this][so-answer] and [this][so-answer-2], that leads to [this discussion][gist-discuss] (with [@mbrowne][mbrowne]) and finally, to this module you're viewing.
+See this [SO Question][so-question], [this][so-answer] and [this][so-answer-2] answers, that leads to [this discussion][gist-discuss] (with [@mbrowne][mbrowne]) and finally, to this module you're viewing.
 
 This module tests various implementations for custom errors, widely used by developers; such as methods making use of `Error.call()`, `Object.create()`, `new Error()`, `Object.setPrototypeOf()`, `extends` (ES2015) and `util.inherits` (Node). See `/errors` directory for [included implementations][errors-dir].
 
