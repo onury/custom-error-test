@@ -12,7 +12,9 @@
     <script>
 
         function getCodeLink(name) {
-            return 'https://github.com/onury/custom-error-test/tree/master/errors/' + name + '.js';
+            return name === 'Error'
+                ? name
+                : '<a href="https://github.com/onury/custom-error-test/tree/master/errors/' + name + '.js" target="_blank">' + name + '</a>';
         }
 
         window.onload = function () {
@@ -25,7 +27,7 @@
             if (!rows || rows.length <= 0) return;
 
             var thead = rows[0].map(function (cell, index) {
-                return '<th><a href="' + getCodeLink(cell) + '" target="_blank">' + cell + '</a></th>';
+                return '<th>' + getCodeLink(cell) + '</th>';
             }).join('');
             thead = '<thead><tr>' + thead + '</tr></thead>';
             rows.shift();
