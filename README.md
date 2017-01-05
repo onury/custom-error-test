@@ -28,7 +28,7 @@ Better, you can [directly view this page][test-page] for testing your current br
 ### License
 MIT.
 
-[test-page]:https://onury.github.io/custom-error-test
+[test-page]:https://onury.github.io/custom-error-test/
 [errors-dir]:https://github.com/onury/custom-error-test/tree/master/errors
 [getPrototypeOf]:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
 [setPrototypeOf]:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf
